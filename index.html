@@ -2,16 +2,14 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>TV Apps</title>
+<title>Akkadian Store</title>
+
 <style>
 body {
   background: #0d0d0d;
   color: white;
   font-family: Arial;
   text-align: center;
-}
-h1 {
-  margin: 20px;
 }
 .container {
   display: flex;
@@ -24,7 +22,6 @@ h1 {
   padding: 15px;
   width: 200px;
   border-radius: 12px;
-  box-shadow: 0 0 10px #000;
 }
 .app img {
   width: 100px;
@@ -36,30 +33,34 @@ h1 {
   background: #00c853;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
 }
 </style>
+
 </head>
 
 <body>
 
 <h1>📺 Akkadian Apps Store</h1>
 
-<div class="container">
+<div class="container" id="apps"></div>
 
-<div class="app">
-  <img src="https://via.placeholder.com/100">
-  <h3>Akkadian TV</h3>
-  <a href="#">تحميل</a>
-</div>
+<script>
+fetch("apps.json")
+.then(res => res.json())
+.then(data => {
+  let container = document.getElementById("apps");
 
-<div class="app">
-  <img src="https://via.placeholder.com/100">
-  <h3>IPTV Player</h3>
-  <a href="#">تحميل</a>
-</div>
-
-</div>
+  data.forEach(app => {
+    container.innerHTML += `
+      <div class="app">
+        <img src="${app.image}">
+        <h3>${app.name}</h3>
+        <a href="${app.url}">تحميل</a>
+      </div>
+    `;
+  });
+});
+</script>
 
 </body>
 </html>
